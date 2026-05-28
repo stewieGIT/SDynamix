@@ -1,0 +1,8 @@
+# ignore cmake build
+build/
+
+# ignore .vscode if exist
+.vscode
+
+# ignore clang file
+.clangd
