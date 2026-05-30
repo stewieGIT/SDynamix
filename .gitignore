@@ -1,8 +1,8 @@
-# ignore cmake build
 build/
+tests/
 
 # ignore .vscode if exist
 .vscode
-
-# ignore clang file
+# ignore other files
 .clangd
+Doxyfile
