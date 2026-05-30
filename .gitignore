@@ -1,5 +1,5 @@
 build/
-tests/
+docs/
 
 # ignore .vscode if exist
 .vscode
