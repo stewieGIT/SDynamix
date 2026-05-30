@@ -1,0 +1,50 @@
+name: Generate and Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrently:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy-docs:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Doxygen and Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+      
+      - name: Run CMake Configuration
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build Doxygen Documentation Target
+        run: |
+          cmake --build build --target doc
+
+      - name: Setup GitHub Pages Infrastructure
+        uses: actions/configure-pages@v4
+
+      - name: Package Documentation Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./docs"
+
+      - name: Deploy Live to GitHub Pages Website
+        id: deployment
+        uses: actions/deploy-pages@v4
