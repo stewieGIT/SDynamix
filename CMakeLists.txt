@@ -50,9 +50,11 @@ if (DOXYGEN_FOUND)
     set(DOXYGEN_HTML_OUTPUT ".")
     set(DOXYGEN_OPTIMIZE_OUTPUT_FOR_C YES)
     set(DOXYGEN_RECURSIVE YES)
-
     # use mathjax instead of installing latex packages...
     set(DOXYGEN_USE_MATHJAX YES)
+    set(DOXYGEN_FILE_PATTERNS "*.c" "*.h" "*.md")
+   
+    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "README.md")
 
     doxygen_add_docs(doc
         ${CMAKE_CURRENT_SOURCE_DIR}/include
