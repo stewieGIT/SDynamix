@@ -1,0 +1,37 @@
+name: Execute and Validate Test Suite
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  run-math-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Compiler Toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc cmake doxygen graphviz
+
+      - name: Configure CMake Engine (Debug Mode)
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Compile Library and Test Target
+        run: |
+          cmake --build build
+
+      - name: Execute CTest Harness Guardrail
+        run: |
+          ctest --test-dir build --output-on-failure
