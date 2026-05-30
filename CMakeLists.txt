@@ -57,6 +57,7 @@ if (DOXYGEN_FOUND)
     doxygen_add_docs(doc
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}/README.md
         COMMENT "Generating Lib documentation"
     )
 endif()
