@@ -9,16 +9,14 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 add_library(sdynamix_core
-    STATIC src/vector.c
+    STATIC src/vector.c src/orbit.c
 )
 
 target_include_directories(sdynamix_core
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(sdynamix_core
-    PRIVATE m
-)
+target_link_libraries(sdynamix_core PRIVATE m)
 
 if (CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "GNU")
     target_compile_options(sdynamix_core PRIVATE
@@ -37,10 +35,10 @@ endif()
 enable_testing()
 add_executable(run_tests
     tests/test_vector.c
+    tests/test_orbit.c
+    tests/test_main.c
 )
-target_link_libraries(run_tests
-    PRIVATE sdynamix_core
-)
+target_link_libraries(run_tests PRIVATE sdynamix_core)
 add_test(NAME CoreVectorMath COMMAND run_tests)
 
 # documentation
