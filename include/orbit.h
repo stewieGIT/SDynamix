@@ -32,4 +32,13 @@ vec3 calculate_angular_m(vec3 r, vec3 v);
  */
 vec3 calculate_node_vector(vec3 h);
 
+/**
+ * @brief Calculates the orbit inclination
+ * * @pre Both input vectors must have matching measurement units.
+ * @param K the unit vector
+ * @param h the angular momentum vector in geocentric reference frame
+ * @return the orbit inclination
+ */
+double calculate_inclination(vec3 K, vec3 h);
+
 #endif

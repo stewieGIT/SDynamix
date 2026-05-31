@@ -19,7 +19,8 @@ inline double m_to_km(double x) { return x / 1e3; }
 
 enum M_UNIT {
     M,
-    KM
+    KM,
+    INVALID_UNIT
 };
 
 #endif

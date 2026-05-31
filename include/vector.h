@@ -8,8 +8,8 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include <assert.h>
 #include "constants.h"
+#include <math.h>
 
 typedef struct
 {
@@ -26,18 +26,9 @@ typedef struct
 #define VEC3_ZERO_KM() VEC3_IN_KM(0.0, 0.0, 0.0)
 #define VEC3_IN_M(x_val, y_val, z_val) ((vec3){ .x = x_val, .y = y_val, .z = z_val, .unit = M })
 #define VEC3_ZERO_M() VEC3_IN_M(0.0, 0.0, 0.0)
-
-#define ASSERT_SAME_UNIT(v1, v2) \
-    assert(v1.unit == v2.unit && "[ERROR] Cannot proceed with calculations with mismatched units")
+#define VEC3_INVALID() ((vec3){ .x = NAN, .y = NAN, .z = NAN, .unit = INVALID_UNIT })
 
 #define PRINT_VEC3(v) printf("x: %lf y: %lf z: %lf [%d]\n", v.x, v.y, v.z, v.unit)
-
-inline vec3 vector_convert_kmtom (vec3 v) {
-    return (vec3){ km_to_m(v.x), km_to_m(v.y), km_to_m(v.z), M };
-}
-inline vec3 vector_convert_mtokm (vec3 v) {
-    return (vec3){ m_to_km(v.x), m_to_km(v.y), m_to_km(v.z), KM };
-}
 
 /**
  * @brief Calculates the magnitude of the vector v
