@@ -42,8 +42,10 @@ target_link_libraries(run_tests PRIVATE sdynamix_core)
 add_test(NAME CoreVectorMath COMMAND run_tests)
 
 # documentation
-find_package(Doxygen REQUIRED)
+find_package(Doxygen)
 if (DOXYGEN_FOUND)
+    message(STATUS "Doxygen found!")
+
     set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs")
     set(DOXYGEN_HTML_OUTPUT ".")
     set(DOXYGEN_OPTIMIZE_OUTPUT_FOR_C YES)
@@ -60,4 +62,6 @@ if (DOXYGEN_FOUND)
         ${CMAKE_CURRENT_SOURCE_DIR}/README.md
         COMMENT "Generating Lib documentation"
     )
+else()
+    message(STATUS "Doxygen not found. Skipping 'doc' target generation")
 endif()

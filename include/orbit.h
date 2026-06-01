@@ -10,8 +10,7 @@
 
 /**
  * @brief Calculates the orbit parameter given the angular momentum h
- * * Computes the algebraic dot product @f$ \mathbf{v}_1 \cdot \mathbf{v}_2 @f$.
- * @param v the input vector
+ * @param h the input vector
  * @return the parameter p
  */
 double calculate_parameter(vec3 h);
