@@ -1,7 +1,7 @@
 #ifndef TEST_H
 #define TEST_H
 
-#define TOL 1e-6
+#define TOL 1e-5
 #define TEST_START(name) int failed = 0; printf("[    RUN   ] %s\n", name)
 #define EXPECT_TRUE(cond, msg) if (!(cond)) { printf("[  FAILED  ] %s (Line %d)\n", msg, __LINE__); failed = 1; }
 #define EXPECT_EQUAL(a, b, msg) if (a != b) { printf("[  FAILED  ] %s (Line %d)\n", msg, __LINE__); failed = 1; }

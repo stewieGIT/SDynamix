@@ -33,6 +33,36 @@ int test_calculate_angular_momentum()
     return failed;
 }
 
+int test_calculate_inclination()
+{
+    TEST_START("test_calculate_inclination");
+
+    vec3 h = VEC3_IN_KM(100.0, 200.0, 400.0);
+
+    double i = calculate_inclination(h);
+
+    EXPECT_NEAR(i, 29.205932241, TOL, "Inclination value is not correct");
+    
+    TEST_END("test_calculate_inclination");
+
+    return failed;
+}
+
+int test_calculate_RAAN()
+{
+    TEST_START("test_calculate_RAAN");
+
+    vec3 n = VEC3_IN_KM(100.0, 200.0, 0.0);
+
+    double RAAN = calculate_RAAN(n);
+
+    EXPECT_NEAR(RAAN, 63.434948855, TOL, "RAAN value is not correct");
+    
+    TEST_END("test_calculate_RAAN");
+
+    return failed;
+}
+
 int run_orbit_tests()
 {
     int domain_test_failures = 0;
@@ -40,6 +70,10 @@ int run_orbit_tests()
     domain_test_failures += test_calculate_parameter();
     printf("\n");
     domain_test_failures += test_calculate_angular_momentum();
+    printf("\n");
+    domain_test_failures += test_calculate_inclination();
+    printf("\n");
+    domain_test_failures += test_calculate_RAAN();
 
     return domain_test_failures;
 }

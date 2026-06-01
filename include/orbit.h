@@ -33,11 +33,16 @@ vec3 calculate_node_vector(vec3 h);
 
 /**
  * @brief Calculates the orbit inclination
- * * @pre Both input vectors must have matching measurement units.
- * @param K the unit vector
  * @param h the angular momentum vector in geocentric reference frame
  * @return the orbit inclination
  */
-double calculate_inclination(vec3 K, vec3 h);
+double calculate_inclination(vec3 h);
+
+/**
+ * @brief Calculates the RAAN
+ * @param n the node vector
+ * @return the RAAN
+ */
+double calculate_RAAN(vec3 n);
 
 #endif
