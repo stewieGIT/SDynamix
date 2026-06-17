@@ -46,6 +46,21 @@ vec3 calculate_node_vector(vec3 h)
     return cross(K, h);
 }
 
+vec3 calculate_eccentricity_vector(vec3 r, vec3 v)
+{
+    if (r.unit == INVALID_UNIT || v.unit == INVALID_UNIT)
+        return VEC3_INVALID();
+
+    double mag_v = mag(v);
+    double mag_r = mag(r);
+
+    double s = (mag_v * mag_v) - (MU / mag_r);
+    vec3 v1 = mul(r, s);
+    vec3 v2 = mul(v, dot(r, v));
+
+    return (1/MU) * sub(v1, v2);
+}
+
 double calculate_inclination(vec3 h)
 {
     if (h.unit == INVALID_UNIT)
@@ -69,4 +84,16 @@ double calculate_RAAN(vec3 n)
     }
 
     return RAAN * (180.0 / PI);
+}
+
+double calculate_arg_of_periapsis(vec3 e, vec3 n)
+{
+    if (e.unit == INVALID_UNIT || n.unit == INVALID_UNIT)
+        return NAN;
+
+    double n = dot(n, e);
+    double d = mag(n) * mag(e);
+    double arg_of_periapsis = acos(n/d);
+
+    return arg_of_periapsis * (180.0 / PI);
 }
