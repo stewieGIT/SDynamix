@@ -58,7 +58,7 @@ vec3 calculate_eccentricity_vector(vec3 r, vec3 v)
     vec3 v1 = mul(r, s);
     vec3 v2 = mul(v, dot(r, v));
 
-    return (1/MU) * sub(v1, v2);
+    return mul(sub(v1, v2), (1/MU));
 }
 
 double calculate_inclination(vec3 h)
@@ -91,9 +91,9 @@ double calculate_arg_of_periapsis(vec3 e, vec3 n)
     if (e.unit == INVALID_UNIT || n.unit == INVALID_UNIT)
         return NAN;
 
-    double n = dot(n, e);
-    double d = mag(n) * mag(e);
-    double arg_of_periapsis = acos(n/d);
+    double numerator = dot(n, e);
+    double denominator = mag(n) * mag(e);
+    double arg_of_periapsis = acos(numerator / denominator);
 
     return arg_of_periapsis * (180.0 / PI);
 }
