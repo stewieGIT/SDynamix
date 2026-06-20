@@ -33,6 +33,22 @@ int test_calculate_angular_momentum()
     return failed;
 }
 
+int test_calculate_node_vector()
+{
+    TEST_START("test_calculate_node_vector");
+
+    vec3 h = VEC3_IN_KM(300.0, 400.0, 500.0);
+
+    vec3 n = calculate_node_vector(h);
+    vec3 n1 = VEC3_IN_KM(-400.0, 300.0, 0.0);
+    EXPECT_VECTOR3_NEAR(n, n1, TOL, "Node vector layout incorrect");
+    EXPECT_EQUAL(n.unit, n1.unit, "Node vector should maintain KM unit scalar context")
+
+    TEST_END("test_calculate_node_vector");
+
+    return failed;
+}
+
 int test_calculate_inclination()
 {
     TEST_START("test_calculate_inclination");
@@ -70,6 +86,8 @@ int run_orbit_tests()
     domain_test_failures += test_calculate_parameter();
     printf("\n");
     domain_test_failures += test_calculate_angular_momentum();
+    printf("\n");
+    domain_test_failures += test_calculate_node_vector();
     printf("\n");
     domain_test_failures += test_calculate_inclination();
     printf("\n");
