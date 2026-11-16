@@ -22,7 +22,7 @@ jobs:
       - name: Install Compiler Toolchain
         run: |
           sudo apt-get update
-          sudo apt-get install -y gcc cmake doxygen graphviz
+          sudo apt-get install -y gcc cmake doxygen graphviz gcovr
 
       - name: Configure CMake Engine (Debug Coverage)
         run: |
